@@ -26,5 +26,7 @@ RUN chown djangouser:djangouser -R /app/
 RUN ls -ashl /home/
 
 USER djangouser
+RUN ls -ashl /app/
+RUN touch /app/test.txt
 
 ENV PATH="/py/bin:$PATH"
