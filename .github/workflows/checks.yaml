@@ -6,16 +6,20 @@ on: [ push ]
 jobs:
   test-lint:
     name: testing and linting
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Login to docker
-        uses: docker/login-action@v1
+      -
+        name: Login to docker hub
+        uses: docker/login-action@v2
         with:
-          username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_TOKEN}}
-      - name: Checkout
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}\
+      -
+        name: Checking out
         uses: actions/checkout@v2
-      - name: Test
-        run: docker-compose run --rm app sh -c 'python manage.py test'
-      - name: Linting
-        run: docker-compose run --rm app sh -c "flake8"
+      -
+        name: Testing
+        run: docker compose run --rm app sh -c "python manage.py test"
+      -
+        name: Linting
+        run: docker compose run --rm app sh -c "flake8"
