@@ -1,11 +1,12 @@
 ---
 name: Checks
 
-on: [ push ]
+on:
+  push:
+    branches: [main]
 
 jobs:
-  test-lint:
-    name: testing and linting
+  login:
     runs-on: ubuntu-latest
     steps:
       -
@@ -13,7 +14,8 @@ jobs:
         uses: docker/login-action@v2
         with:
             username: ${{ secrets.DOCKERHUB_USER }}
-            password: ${{ secrets.DOCKERHUB_PASS }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Checking out
         uses: actions/checkout@v2
       - name: Testing
